@@ -1,25 +1,39 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>NaganoCake</title>
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
+<head>
+  <title>NaganoCake</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
 
-  <body>
-    <header class="navbar navbar-static-top navbar-inverse">
+<body>
+  <header class="navbar navbar-static-top navbar-inverse">
     <div class="container">
       <nav class='nav navbar-nav navbar-left' >
         <div style="font-size: 30px; color: white;">NaganoCake</div>
       </nav>
+      <% if end_user_signed_in? %>
+      <% if flash[:notice] %>
+      <p>
+        <div class='nav navbar-nav' style="color: white; padding-left: 250px;">
+          <%= flash[:notice] %>
+          <% if flash[:notice]=='ようこそ' %>
+          <%= @end_user.last_name %>
+          <%= @end_user.first_name %>
+          さん
+          <% end %>
+        </div>
+      </p>
+      <% end %>
+      <% end %>
       <nav>
         <ul class="nav navbar-nav navbar-right">
           <% if end_user_signed_in? %>
           <li>
-            <%=link_to "マイページ",'#',class:"glyphicon glyphicon-home home"
+            <%=link_to "マイページ",end_user_path(current_end_user),class:"glyphicon glyphicon-home home"
             %>
           </li>
           <li>
@@ -57,6 +71,6 @@
       </nav>
     </div>
   </header>
-    <%= yield %>
-  </body>
+  <%= yield %>
+</body>
 </html>

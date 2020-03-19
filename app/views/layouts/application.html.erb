@@ -37,6 +37,10 @@
             %>
           </li>
           <li>
+            <%=link_to "商品一覧",items_path,class:"glyphicon glyphicon-th-list th-list"
+            %>
+          </li>
+          <li>
             <%=link_to "カート一覧",'#',class:"glyphicon glyphicon-shopping-cart shopping-cart"
             %>
           </li>
@@ -46,11 +50,15 @@
           </li>
           <% elsif admin_signed_in? %>
           <li>
+            <%=link_to "商品一覧",admins_items_path,class:"glyphicon glyphicon-th-list th-list"
+            %>
+          </li>
+          <li>
             <%=link_to "受注一覧",'#',class:"glyphicon glyphicon-list-alt list-alt"
             %>
           </li>
           <li>
-            <%=link_to "商品登録",'#',class:"glyphicon glyphicon-download-alt download-alt"
+            <%=link_to "商品登録",new_admins_item_path,class:"glyphicon glyphicon-download-alt download-alt"
             %>
           </li>
           <li>
@@ -58,6 +66,10 @@
             %>
           </li>
           <% else %>
+          <li>
+            <%=link_to "商品一覧",items_path,class:"glyphicon glyphicon-th-list th-list"
+            %>
+          </li>
           <li>
             <%=link_to "会員登録",new_end_user_registration_path,class:"glyphicon glyphicon-edit sign_up"
             %>

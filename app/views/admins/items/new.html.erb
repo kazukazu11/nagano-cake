@@ -1,0 +1,67 @@
+<div class="container">
+
+	<div class="row">
+		<h1>商品 新規登録画面</h1>
+	</div>
+
+	<%= form_for(@item,url:admins_items_path) do |f| %>
+
+	<div class="row">
+	<div class="col-lg-4">
+		<div>
+			<%= attachment_image_tag @item, :product_image, :fill, 60, 60, fallback: "no_image.jpg"%>
+		</div>
+		<div>
+			<%= f.attachment_field :product_image%>
+		</div>
+	</div>
+
+	<div class="col-lg-4 text-center">
+
+	<div style="padding-bottom: 20px;">
+		<div>
+			商品名
+		</div>
+		<%= f.text_field :name %>
+	</div>
+
+	<div style="padding-bottom: 20px;">
+		<div>
+			商品説明
+		</div>
+		<%= f.text_area :description %>
+	</div>
+	</div>
+	</div>
+
+	<div style="padding-bottom: 20px; text-align: center;">
+		<div>
+			ジャンル
+		</div>
+		<%= f.select :genre_id, [["ケーキ",1],["プリン",2],["焼き菓子",3],["キャンディ",4]], include_blank: "--選択して下さい--" %>
+	</div>
+	<div style="padding-bottom: 20px; text-align: center;">
+		<div>
+			税抜価格
+		</div>
+		<%= f.text_field :price_excluding_tax %>円
+	</div>
+	<div style="padding-bottom: 20px; text-align: center;">
+		<div>
+			販売ステータス
+		</div>
+		<label>
+			<%= f.radio_button :sale_status, :販売停止中%>販売停止中
+		</label>
+		<label>
+			<%= f.radio_button :sale_status, :販売中%>販売中
+		</label>
+	</div>
+
+	<div style="text-align: right;">
+		<%= f.submit "新規登録" %>
+	</div>
+
+	<% end %>
+
+</div>

@@ -1,0 +1,27 @@
+<div class="container">
+	<div class="row" style="padding-bottom: 20px;">
+		<h1>商品一覧（全
+      <%= @items.count%>
+      件）
+    </h1>
+	</div>
+  <!-- <div>
+    <div>ジャンル検索</div>
+    <div>
+      <ul style="list-style: none;">
+        <li>ケーキ</li>
+        <li>焼き菓子</li>
+        <li>プリン</li>
+        <li>キャンディ</li>
+      </ul>
+    </div>
+  </div> -->
+    <% @items.each do |item| %>
+      <div style="float: left;">
+        <p><%= attachment_image_tag item, :product_image, :fill, 150, 150, fallback: "no_image.jpg", size:'150x150'%>
+        </p>
+        <p><%= item.name%></p>
+        <p>¥<%= item.price_excluding_tax%></p>
+      </div>
+    <% end %>
+</div>

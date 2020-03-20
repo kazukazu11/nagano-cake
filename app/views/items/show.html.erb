@@ -1,0 +1,38 @@
+<div class="container">
+ 	<!-- <div>
+    <div>ジャンル検索</div>
+    	<div>
+      		<ul style="list-style: none;">
+        		<li>ケーキ</li>
+        		<li>焼き菓子</li>
+        		<li>プリン</li>
+        		<li>キャンディ</li>
+      		</ul>
+    	</div>
+	</div> -->
+	<div class="row">
+		<div class="col-lg-5" style="margin-left: 200px;"><%= attachment_image_tag @item, :product_image, :fill, 400, 250, fallback: "no_image.jpg", size:'400x250' %>
+		</div>
+		<div class="col-lg-4">
+			<h1 style="padding-bottom: 40px;">
+				<%= @item.name %>
+			</h1>
+			<div style="padding-bottom: 30px;">
+				<%= @item.description %>
+			</div>
+			<h3>
+				¥<%= @item.price_excluding_tax %>
+			</h3>
+		</div>
+	</div>
+	<div class="row">
+		<%= form_for(@cart_item) do |f| %>
+			<div class="col-lg-9 text-right">
+			<%= f.select :amount, [["1",1],["2",2],["3",3],["4",4],["5",5],["6",6],["7",7],["8",8],["9",9],["10",10]], include_blank: "個数選択" %>
+			</div>
+			<div class="col-lg-3">
+				<%= f.submit "カートに入れる" %>
+			</div>
+		<% end %>
+	</div>
+</div>

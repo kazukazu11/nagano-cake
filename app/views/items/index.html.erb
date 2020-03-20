@@ -18,10 +18,17 @@
   </div> -->
     <% @items.each do |item| %>
       <div style="float: left;">
-        <p><%= attachment_image_tag item, :product_image, :fill, 150, 150, fallback: "no_image.jpg", size:'150x150'%>
-        </p>
-        <p><%= item.name%></p>
-        <p>¥<%= item.price_excluding_tax%></p>
+        <% if end_user_signed_in? %>
+          <p><%= link_to attachment_image_tag(item, :product_image, :fill, 150, 150, fallback: "no_image.jpg", size:'150x150'), item_path(item.id)%>
+          </p>
+          <p><%= link_to item.name, item_path(item.id)%></p>
+          <p>¥<%= link_to item.price_excluding_tax, item_path(item.id)%></p>
+        <% else %>
+          <p><%= attachment_image_tag item, :product_image, :fill, 150, 150, fallback: "no_image.jpg", size:'150x150'%>
+          </p>
+          <p><%= item.name%></p>
+          <p>¥<%= item.price_excluding_tax%></p>
+        <% end %>
       </div>
     <% end %>
 </div>

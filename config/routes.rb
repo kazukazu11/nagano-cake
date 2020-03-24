@@ -5,9 +5,14 @@ Rails.application.routes.draw do
   resources :end_users, only: [:show,:edit,:update,:destroy]
   resources :items, only: [:show,:index]
   resources :cart_items, only: [:update,:index,:destroy,:create]
-  resources :orders, only: [:new,:create]
+  # resources :orders, only: [:create]
+  resources :orders, only: [:new,:create] do
+    collection do
+      post :confirm
+    end
+  end
   get 'orders/done' => 'orders#done'
-  get 'orders/confirm' => 'orders#confirm'
+  # get 'orders/confirm' => 'orders#confirm'
   namespace :admins do
     resources :items
     resources :end_users

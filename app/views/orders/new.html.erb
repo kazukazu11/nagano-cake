@@ -2,7 +2,7 @@
 	<div class="row">
 		<h2>注文情報入力</h2>
 	</div>
-	<%= form_with model:@order do |f| %>
+	<%= form_for(@order,url: confirm_orders_path) do |f| %>
 		<% total = 0 %>
 		<% @cart_items.each do |cart_item| %>
 		 	<% total = total + cart_item.amount*cart_item.item.price_excluding_tax %>

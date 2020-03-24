@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_19_122839) do
+ActiveRecord::Schema.define(version: 2020_03_21_114508) do
+
+  create_table "addresses", force: :cascade do |t|
+    t.integer "end_user_id"
+    t.string "receiver"
+    t.string "postal_code"
+    t.string "street_address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -61,6 +70,29 @@ ActiveRecord::Schema.define(version: 2020_03_19_122839) do
     t.integer "price_excluding_tax"
     t.string "product_image_id"
     t.integer "sale_status", default: 1
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "end_user_id"
+    t.string "receiver"
+    t.string "postal_code"
+    t.string "address"
+    t.integer "total_billed_amount"
+    t.integer "postage"
+    t.integer "order_status", default: 0
+    t.integer "payment_method"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "orders_details", force: :cascade do |t|
+    t.integer "item_id"
+    t.integer "order_id"
+    t.integer "amount"
+    t.integer "order_product_price"
+    t.integer "production_status", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

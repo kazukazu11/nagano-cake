@@ -2,11 +2,9 @@ class CartItemsController < ApplicationController
 	before_action :authenticate_end_user!
 	def index
 		@cart_items=CartItem.all
-		@cart_items_copy=CartItem.all
 	end
 	def create
 		@cart_item=CartItem.new(cart_item_params)
-		@cart_item.item_id = $item_id_FK
 		@cart_item.end_user_id = current_end_user.id
 		@cart_item.save
 		redirect_to cart_items_path
@@ -28,6 +26,7 @@ class CartItemsController < ApplicationController
 	end
 	private
 	def cart_item_params
-		params.require(:cart_item).permit(:amount)
+		params.require(:cart_item).permit(:amount,:item_id)
 	end
 end
+ 

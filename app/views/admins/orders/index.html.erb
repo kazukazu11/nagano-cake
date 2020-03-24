@@ -1,0 +1,27 @@
+<div class="container">
+	<div class="row">
+		<h1>注文一覧画面</h1>
+	</div>
+	<table class="table table-hover table-inverse">
+        <thead>
+          <tr>
+            <th>購入日時</th>
+            <th>購入者</th>
+            <th>注文ステータス</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @orders.each do |order| %>
+          <tr>
+            <td><%= link_to order.created_at, admins_order_path(order.id)%></td>
+            <% @end_users.each do |end_user| %>
+              <% if order.end_user_id == end_user.id %>
+                <td><%= end_user.last_name %><%= end_user.first_name %></td>
+              <% end %>
+            <% end %>
+            <td><%= order.order_status_i18n%></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+</div>

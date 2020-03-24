@@ -9,3 +9,15 @@ Admin.create!(
    email: 'test@test.com',
    password: 'testtest'
 )
+
+# 5.tims do |n|
+# Item.create!(
+# 	genre_id: n,
+# 	name: n,
+# 	description: n,
+# 	price_excluding_tax: n,
+# 	product_image_id: n
+# )
+
+# end
+

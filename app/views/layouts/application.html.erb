@@ -48,6 +48,11 @@
             <%=link_to "ログアウト",destroy_end_user_session_path, method: :delete,class:"glyphicon glyphicon-log-out logout"
             %>
           </li>
+          <div class="text-right" style="padding-top: 10px;">
+            <%= form_tag(items_path, method: :get, enforce_utf8: false) do %>
+              <%= autocomplete_field_tag 'item[name]', nil, autocomplete_item_name_items_path %>
+            <% end %>
+          </div>
           <% elsif admin_signed_in? %>
           <li>
             <%=link_to "商品一覧",admins_items_path,class:"glyphicon glyphicon-th-list th-list"

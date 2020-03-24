@@ -177,6 +177,8 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.3.0)
       loofah (~> 2.3)
+    rails4-autocomplete (1.1.1)
+      rails (>= 3.0)
     railties (5.2.4.1)
       actionpack (= 5.2.4.1)
       activesupport (= 5.2.4.1)
@@ -278,6 +280,7 @@ DEPENDENCIES
   pry-byebug
   puma (~> 3.11)
   rails (~> 5.2.4, >= 5.2.4.1)
+  rails4-autocomplete
   refile!
   refile-mini_magick
   sass-rails (~> 5.0)

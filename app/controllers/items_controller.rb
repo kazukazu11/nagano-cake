@@ -1,7 +1,12 @@
 class ItemsController < ApplicationController
 	before_action :authenticate_end_user,only: [:show]
 	def index
-		@items=Item.all
+		if params[:item] && params[:item][:name]
+			item_name = params[:item][:name]
+			@items = Item.where("name LIKE '%#{item_name}%'")
+		else
+			@items=Item.all
+		end
 	end
 	def show
 		@item=Item.find(params[:id])

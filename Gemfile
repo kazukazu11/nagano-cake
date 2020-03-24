@@ -74,3 +74,5 @@ gem "refile-mini_magick"
 gem 'pry-byebug'
 
 gem 'enum_help'
+
+gem 'rails4-autocomplete'

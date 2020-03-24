@@ -22,4 +22,7 @@ Rails.application.routes.draw do
   resources :orders_details, only: [:create]
   get 'end_users' => 'end_users#leave'
   delete 'cart_items' => 'cart_items#destroy_all'
+  resources :items do
+    get :autocomplete_item_name, on: :collection # 追加
+  end
 end

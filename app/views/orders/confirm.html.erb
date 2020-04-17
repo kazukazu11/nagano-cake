@@ -46,7 +46,7 @@
 	</div>
 	<div class="row">
 		<div class="col-lg-12 text-center" style="margin-bottom: 30px;">
-			<%= form_for(@order) do |f| %>
+			<%= form_for(@order) do |f| %> 
 				<%= f.hidden_field :end_user_id, :value => current_end_user.id %>
 				<%= f.hidden_field :receiver, :value => @order.receiver %>
 				<%= f.hidden_field :postal_code, :value => @order.postal_code %>
@@ -55,6 +55,14 @@
 				<%= f.hidden_field :postage, :value => @order.postage %>
 				<%= f.hidden_field :order_status, :value => @order.order_status %>
 				<%= f.hidden_field :payment_method, :value => @order.payment_method %>
+				<%= f.fields_for :orders_details,@order_detail do |c| %>
+					<% @cart_items.each do |cart_item| %>
+						<%= c.hidden_field :item_id, :value => cart_item.item_id %>
+						<%= c.hidden_field :order_id, :value => @order.id %>
+						<%= c.hidden_field :amount, :value => cart_item.amount %>
+						<%= c.hidden_field :order_product_price, :value => cart_item.item.price_excluding_tax %>
+					<% end %>
+				<% end %>
 				<%= f.submit "購入を確定する"%>
 			<% end %>
 		</div>

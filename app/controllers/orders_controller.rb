@@ -2,11 +2,19 @@ class OrdersController < ApplicationController
 	before_action :authenticate_end_user!
 	before_action :order_params1, only: [:confirm]
 	before_action :order_params, only: [:confirm]
+	before_action :cart_check, only: [:new]
+	def cart_check
+		@cart_items=CartItem.all
+		if @cart_items.empty?
+			redirect_to items_path
+		end
+	end
 	def new
 		@order=Order.new
 		@cart_items=current_end_user.cart_items
 	end
 	def confirm
+		@order_detail=OrdersDetail.new
 		@cart_items=current_end_user.cart_items
 		if params[:select] == "1"
 			@order=Order.new(order_params1)
@@ -29,7 +37,7 @@ class OrdersController < ApplicationController
 			@order.postage=800
 		end
 		render :confirm
-	end 
+	end
 	def done
 	end
 	def create
@@ -66,6 +74,6 @@ class OrdersController < ApplicationController
 		params.require(:order).permit(:receiver,:postal_code,:address,:total_billed_amount,:payment_method)
 	end
 	def order_confirm_params
-		params.require(:order).permit(:end_user_id,:receiver,:postal_code,:address,:total_billed_amount,:postage,:order_status,:payment_method)
+		params.require(:order).permit(:end_user_id,:receiver,:postal_code,:address,:total_billed_amount,:postage,:order_status,:payment_method,orders_details_attributes:[:item_id,:order_id,:amount,:order_product_price])
 	end
 end

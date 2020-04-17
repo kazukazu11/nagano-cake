@@ -1,0 +1,46 @@
+<div class="container">
+	<div class="row">
+		<h1>注文詳細画面</h1>
+	</div>
+	<div class="row">
+		<div class="col-lg-3">
+			<h3>購入者</h3>
+		</div>
+		<div class="col-lg-3">
+			<% @end_users.each do |end_user| %>
+				<% if @order.end_user_id == end_user.id %>
+					<h3><%= end_user.last_name %><%= end_user.first_name %></h3>
+				<% end %>
+			<% end %>
+		</div>
+	</div> 
+	<div class="row">
+		<div class="col-lg-3">
+			<h3>配送先</h3>
+		</div>
+		<div class="col-lg-3">
+			<h3><%= @order.postal_code %>　<%= @order.address %>　<%= @order.receiver %></h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-3">
+			<h3>支払方法</h3>
+		</div>
+		<div class="col-lg-3">
+			<h3><%= @order.payment_method_i18n %></h3>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-3">
+			<h3>注文ステータス</h3>
+		</div>
+		<div class="col-lg-3">
+			<%= form_for(@order,url:admins_order_path(@order.id)) do |f| %>
+			<h3>
+				<%= f.select :order_status, Order.order_statuses_i18n.keys.map { |k| [Order.order_statuses_i18n[k], k]}%>
+				<%= f.submit "更新"%>
+			</h3>
+			<% end %>
+		</div>
+	</div>
+</div>

@@ -1,1 +1,66 @@
-<h1>マイページ</h1>
+<div class="container">
+	<div class="row">
+		<h2>マイページ</h2>
+	</div>
+	<div class="row">
+		<div class="col-lg-1" style="font-size: 15px; padding-top: 5px;">
+			<strong>登録情報</strong>
+		</div>
+		<div class="col-lg-1" style="font-size: 15px;">
+			<%= link_to "編集する", edit_end_user_path(@end_user.id),class: "btn btn-default" %>
+		</div>
+		<div class="col-lg-1" style="font-size: 15px;">
+			<%= link_to "退会する", end_users_path,class: "btn btn-default" %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-2">
+			氏名
+		</div>
+		<div class="col-lg-2">
+			<%= @end_user.last_name %>
+			<%= @end_user.first_name %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-2">
+			カナ
+		</div>
+		<div class="col-lg-2">
+			<%= @end_user.last_name_kana %>
+			<%= @end_user.first_name_kana %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-2">
+			郵便番号
+		</div>
+		<div class="col-lg-2">
+			<%= @end_user.postal_code %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-2">
+			住所
+		</div>
+		<div class="col-lg-2">
+			<%= @end_user.address %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-2">
+			電話番号
+		</div>
+		<div class="col-lg-2">
+			<%= @end_user.phone_number %>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-2">
+			メールアドレス
+		</div>
+		<div class="col-lg-2">
+			<%= @end_user.email %>
+		</div>
+	</div>
+</div>

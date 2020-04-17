@@ -1,0 +1,82 @@
+<div class="container">
+	<div class="row">
+		<h2>注文情報入力</h2>
+	</div>
+	<%= form_for(@order,url: confirm_orders_path) do |f| %>
+		<% total = 0 %>
+		<% @cart_items.each do |cart_item| %>
+		 	<% total = total + cart_item.amount*cart_item.item.price_excluding_tax %>
+		<% end %>
+		<%= f.hidden_field :total_billed_amount, :value => total %>
+		<div>
+			<h3><strong>支払方法</strong></h3>
+			<div>
+				<label>
+					<%= f.radio_button :payment_method, :credit%>クレジットカード
+				</label>
+			</div>
+			<div>
+				<label>
+					<%= f.radio_button :payment_method, :bank%>銀行振込
+				</label>
+			</div>
+		</div>
+		<div>
+			<h3><strong>お届け先</strong></h3>
+			<div style="padding-top: 20px;">
+				<label>
+					<%= radio_button_tag :select, "1"%>ご自身の住所
+					<%= hidden_field_tag :receiver1, current_end_user.last_name+current_end_user.first_name %>
+					<%= hidden_field_tag :address1, current_end_user.address %>
+					<%= hidden_field_tag :postal_code1, current_end_user.postal_code %>
+					<div style="padding-left: 20px;">
+						<%= current_end_user.postal_code %>　
+						<%= current_end_user.address %>　
+						<%= current_end_user.last_name %>　
+						<%= current_end_user.first_name %>
+					</div>
+				</label>
+			</div>
+			<div style="padding-top: 20px;">
+				<label>
+					<%= radio_button_tag :select, "2"%>登録済住所から選択
+					<div style="padding-left: 20px;">
+						<%= select_tag :address_id,options_for_select(Address.where(end_user_id: current_end_user.id).map { |e| e.postal_code }) %>
+					</div>
+				</label>
+			</div>
+			<div style="padding-top: 20px;">
+				<label>
+					<%= radio_button_tag :select, "3"%>新しいお届け先
+					<div class="row">
+						<div class="col-lg-6">
+							<%= f.label :郵便番号（ハイフンなし） %>
+						</div>
+						<div class="col-lg-2">
+							<%= f.text_field :postal_code %>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<%= f.label :住所 %>
+						</div>
+						<div class="col-lg-2">
+							<%= f.text_field :address,:size => "40*40" %>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-6">
+							<%= f.label :宛名 %>
+						</div>
+						<div class="col-lg-2">
+							<%= f.text_field :receiver %>
+						</div>
+					</div>
+				</label>
+			</div>
+		</div>
+		<div class="row btn-lg text-center">
+			<%= f.submit "確認画面へ進む"%>
+		</div>
+	<% end %>
+</div>
